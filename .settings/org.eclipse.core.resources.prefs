@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/main/webapp/WEB-INF/views/lichsudatphong/add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/lichsudatphong/edit.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/lichsudatphong/list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/nguoidung/add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/nguoidung/edit.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/nguoidung/list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/phonghoc/add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/phonghoc/edit.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/phonghoc/list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/thietbi/add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/thietbi/edit.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/thietbi/list.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/yeucausua/add.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/yeucausua/edit.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/yeucausua/list.jsp=UTF-8
