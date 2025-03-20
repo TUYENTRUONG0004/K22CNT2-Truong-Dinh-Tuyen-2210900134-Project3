@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +19,7 @@ public class Tdt_ThietBiDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
- 
+    // RowMapper: chuyển đổi dữ liệu từ ResultSet sang đối tượng Tdt_ThietBi
     private static class Tdt_ThietBiRowMapper implements RowMapper<Tdt_ThietBi> {
         @Override
         public Tdt_ThietBi mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -41,6 +40,7 @@ public class Tdt_ThietBiDAO {
         String sql = "SELECT * FROM tdt_ThietBi";
         return jdbcTemplate.query(sql, new Tdt_ThietBiRowMapper());
     }
+
     // Lấy thông tin thiết bị theo mã
     public Tdt_ThietBi getById(String maThietBi) {
         String sql = "SELECT * FROM tdt_ThietBi WHERE tdt_MaThietBi = ?";
@@ -55,7 +55,7 @@ public class Tdt_ThietBiDAO {
                 thietBi.getTdt_TenThietBi(),
                 thietBi.getTdt_LoaiThietBi(),
                 thietBi.getTdt_MaPhong(),
-                thietBi.getTdt_NgayMua(),
+                thietBi.getTdt_NgayMua() != null ? new java.sql.Date(thietBi.getTdt_NgayMua().getTime()) : null,
                 thietBi.getTdt_TrangThai(),
                 thietBi.getTdt_GhiChu());
     }
@@ -67,7 +67,7 @@ public class Tdt_ThietBiDAO {
                 thietBi.getTdt_TenThietBi(),
                 thietBi.getTdt_LoaiThietBi(),
                 thietBi.getTdt_MaPhong(),
-                thietBi.getTdt_NgayMua(),
+                thietBi.getTdt_NgayMua() != null ? new java.sql.Date(thietBi.getTdt_NgayMua().getTime()) : null,
                 thietBi.getTdt_TrangThai(),
                 thietBi.getTdt_GhiChu(),
                 thietBi.getTdt_MaThietBi());

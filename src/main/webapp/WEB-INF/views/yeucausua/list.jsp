@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách Yêu Cầu Sửa</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    	
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +34,7 @@
             background-color: #fff;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 5px solid #28a745;
             padding: 8px;
             text-align: left;
         }
@@ -60,7 +62,10 @@
 </head>
 <body>
     <h1>Danh sách Yêu Cầu Sửa</h1>
-    <a class="add-link" href="${pageContext.request.contextPath}/yeucausua/add">ADD</a>
+  
+    <form action="${pageContext.request.contextPath}/yeucausua/add" method="get" style="display: inline;">
+    <button class="btn-add" type="submit">ADD</button>
+</form>
     <table>
         <thead>
             <tr>
@@ -87,13 +92,14 @@
                     <td>${yc.tdt_NgayGui}</td>
                     <td>${yc.tdt_NgayXuLy}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/yeucausua/edit/${yc.tdt_MaYeuCau}">Sửa</a>
-                        |
-                        <a href="${pageContext.request.contextPath}/yeucausua/delete/${yc.tdt_MaYeuCau}"
-                           onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
-                           Xóa
-                        </a>
-                    </td>
+    <form action="${pageContext.request.contextPath}/yeucausua/edit/${yc.tdt_MaYeuCau}" method="get" style="display:inline;">
+        <button type="submit" class="btn btn-primary">Sửa</button>
+    </form>
+    <form action="${pageContext.request.contextPath}/yeucausua/delete/${yc.tdt_MaYeuCau}" style="display:inline;"
+          onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+        <button type="submit" class="btn btn-danger">Xóa</button>
+    </form>
+</td>
                 </tr>
             </c:forEach>
         </tbody>

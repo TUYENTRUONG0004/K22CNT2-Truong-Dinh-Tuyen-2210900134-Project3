@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Các Phản Hồi</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -25,7 +27,7 @@
             background-color: #fff;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 5px solid #28a745;
             padding: 8px;
             text-align: left;
         }
@@ -71,7 +73,10 @@
 </head>
 <body>
     <h1>Phản Hồi</h1>
-    <a class="add-link" href="${pageContext.request.contextPath}/phanhoi/add">➕</a>
+    
+    <form action="${pageContext.request.contextPath}/phanhoi/add" method="get" style="display: inline;">
+    <button class="btn-add" type="submit">➕</button>
+</form>
     <table>
         <thead>
             <tr>
@@ -88,10 +93,12 @@
                     <td>${ph.tdt_LoaiPhanHoi}</td>
                     <td>${ph.tdt_MoTa}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/phanhoi/delete/${ph.tdt_MaPhanHoi}"class="btn btn-delete"
-                           onclick="return confirm('Bạn có chắc chắn muốn xóa không?');">
-                           Xóa
-                        </a>
+                       
+
+<form action="${pageContext.request.contextPath}/phanhoi/delete/${ph.tdt_MaPhanHoi}"  style="display:inline;"
+      onsubmit="return confirm('Bạn có chắc chắn muốn xóa?');">
+    <button type="submit" class="btn btn-danger">Xóa</button>
+</form>
                     </td>
                 </tr>
             </c:forEach>

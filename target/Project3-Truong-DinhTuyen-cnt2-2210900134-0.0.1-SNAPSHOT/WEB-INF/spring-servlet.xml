@@ -26,25 +26,28 @@
     </bean>
 
     <!-- Cấu hình JdbcTemplate -->
-    	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
-		<property name="dataSource" ref="db"></property>
-	</bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>
 
     <!-- Cấu hình DAO -->
-    <bean id="tdt_NguoiDungDAO" class="com.springmvc.dao.Tdt_NguoiDungDAO">
+    <bean id="tdtNguoiDungDAO" class="com.springmvc.dao.Tdt_NguoiDungDAO">
         <constructor-arg ref="jdbcTemplate" />
     </bean>
-    <bean id="tdt_PhongHocDAO" class="com.springmvc.dao.Tdt_PhongHocDAO">
+    <bean id="tdtPhongHocDAO" class="com.springmvc.dao.Tdt_PhongHocDAO">
         <constructor-arg ref="jdbcTemplate" />
     </bean>
-    <bean id="tdt_ThietBiDAO" class="com.springmvc.dao.Tdt_ThietBiDAO">
+    <bean id="tdtThietBiDAO" class="com.springmvc.dao.Tdt_ThietBiDAO">
         <constructor-arg ref="jdbcTemplate" />
     </bean>
-    <bean id="tdt_YeuCauSuaDAO" class="com.springmvc.dao.Tdt_YeuCauSuaDAO">
+    <bean id="tdtYeuCauSuaDAO" class="com.springmvc.dao.Tdt_YeuCauSuaDAO">
         <constructor-arg ref="jdbcTemplate" />
     </bean>
-    <bean id="tdt_LichSuDatPhongDAO" class="com.springmvc.dao.Tdt_LichSuDatPhongDAO">
+    <bean id="tdtLichSuDatPhongDAO" class="com.springmvc.dao.Tdt_LichSuDatPhongDAO">
         <constructor-arg ref="jdbcTemplate" />
     </bean>
 
+    <bean id="tdtphanHoiDAO" class="com.springmvc.dao.Tdt_PhanHoiDAO">
+        <constructor-arg ref="jdbcTemplate" />
+    </bean>
 </beans>

@@ -53,8 +53,13 @@
     </style>
 </head>
 <body>
+<div class="header-links">
+            <a href="https://www.facebook.com" target="_blank" class="social-btn"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://twitter.com" target="_blank" class="social-btn"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com" target="_blank" class="social-btn"><i class="fab fa-instagram"></i></a>
+        </div>
     <div class="header">
-        <h1>Chào mừng đến Quản lý Nhân Sự</h1>
+        <h1>Chào mừng đến với Trang WeB :)</h1>
     </div>
     <div class="content">
         <% 
@@ -62,10 +67,11 @@
             String message = "Xin chào, JSP!";
             out.print("<p>" + message + "</p>");
         %>
-        <a href="menu">Đến Menu Chức Năng</a>
+        <a href="${pageContext.request.contextPath}/nguoidung/menu">Chuyển đến Menu</a>
     </div>
     <div class="footer">
         <p>&copy; 2025 Trang Web của Bạn</p>
     </div>
+    
 </body>
 </html>

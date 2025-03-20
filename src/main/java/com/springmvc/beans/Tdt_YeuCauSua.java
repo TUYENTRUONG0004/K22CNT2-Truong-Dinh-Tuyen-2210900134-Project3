@@ -1,6 +1,7 @@
 package com.springmvc.beans;
 
-import java.sql.Date;
+import java.util.Date;
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Tdt_YeuCauSua {
 
@@ -8,16 +9,21 @@ public class Tdt_YeuCauSua {
     private String tdt_MoTa;
     private String tdt_MaThietBi;
     private String tdt_MaPhong;
-    private int tdt_MaNguoiDung;
+    private Integer tdt_MaNguoiDung;  // Sửa từ int -> Integer
     private String tdt_TrangThai;
-    private Date tdt_NgayGui;
-    private Date tdt_NgayXuLy;
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tdt_NgayGui;         // Sử dụng java.util.Date
+    
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tdt_NgayXuLy;        // Sử dụng java.util.Date
 
     // Constructor mặc định
     public Tdt_YeuCauSua() { }
 
     // Constructor có tham số
-    public Tdt_YeuCauSua(String tdt_MaYeuCau, String tdt_MoTa, String tdt_MaThietBi, String tdt_MaPhong, int tdt_MaNguoiDung, String tdt_TrangThai, Date tdt_NgayGui, Date tdt_NgayXuLy) {
+    public Tdt_YeuCauSua(String tdt_MaYeuCau, String tdt_MoTa, String tdt_MaThietBi, String tdt_MaPhong, 
+                         Integer tdt_MaNguoiDung, String tdt_TrangThai, Date tdt_NgayGui, Date tdt_NgayXuLy) {
         this.tdt_MaYeuCau = tdt_MaYeuCau;
         this.tdt_MoTa = tdt_MoTa;
         this.tdt_MaThietBi = tdt_MaThietBi;
@@ -61,11 +67,11 @@ public class Tdt_YeuCauSua {
         this.tdt_MaPhong = tdt_MaPhong;
     }
 
-    public int getTdt_MaNguoiDung() {
+    public Integer getTdt_MaNguoiDung() {
         return tdt_MaNguoiDung;
     }
 
-    public void setTdt_MaNguoiDung(int tdt_MaNguoiDung) {
+    public void setTdt_MaNguoiDung(Integer tdt_MaNguoiDung) {
         this.tdt_MaNguoiDung = tdt_MaNguoiDung;
     }
 

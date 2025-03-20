@@ -20,7 +20,7 @@ public class Tdt_YeuCauSuaDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // RowMapper pour mapper les résultats de la requête SQL
+    // RowMapper được cập nhật để sử dụng kiểu dữ liệu mới
     private static class Tdt_YeuCauSuaRowMapper implements RowMapper<Tdt_YeuCauSua> {
         @Override
         public Tdt_YeuCauSua mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -29,14 +29,17 @@ public class Tdt_YeuCauSuaDAO {
             yc.setTdt_MoTa(rs.getString("tdt_MoTa"));
             yc.setTdt_MaThietBi(rs.getString("tdt_MaThietBi"));
             yc.setTdt_MaPhong(rs.getString("tdt_MaPhong"));
-            yc.setTdt_MaNguoiDung(rs.getInt("tdt_MaNguoiDung"));
+            // Chuyển đổi an toàn cho tdt_MaNguoiDung (Integer)
+            Object nguoiDungObj = rs.getObject("tdt_MaNguoiDung");
+            yc.setTdt_MaNguoiDung(nguoiDungObj != null ? ((Number) nguoiDungObj).intValue() : null);
             yc.setTdt_TrangThai(rs.getString("tdt_TrangThai"));
-            yc.setTdt_NgayGui(rs.getDate("tdt_NgayGui"));
+            yc.setTdt_NgayGui(rs.getDate("tdt_NgayGui"));     // java.sql.Date kế thừa java.util.Date
             yc.setTdt_NgayXuLy(rs.getDate("tdt_NgayXuLy"));
             return yc;
         }
     }
 
+    // Lấy danh sách yêu cầu sửa
     public List<Tdt_YeuCauSua> list() {
         String sql = "SELECT * FROM tdt_YeuCauSua";
         return jdbcTemplate.query(sql, new Tdt_YeuCauSuaRowMapper());
@@ -58,8 +61,8 @@ public class Tdt_YeuCauSuaDAO {
                 yeuCau.getTdt_MaPhong(),
                 yeuCau.getTdt_MaNguoiDung(),
                 yeuCau.getTdt_TrangThai(),
-                yeuCau.getTdt_NgayGui(),
-                yeuCau.getTdt_NgayXuLy());
+                yeuCau.getTdt_NgayGui() != null ? new java.sql.Date(yeuCau.getTdt_NgayGui().getTime()) : null,
+                yeuCau.getTdt_NgayXuLy() != null ? new java.sql.Date(yeuCau.getTdt_NgayXuLy().getTime()) : null);
     }
 
     // Cập nhật thông tin yêu cầu sửa
@@ -71,8 +74,8 @@ public class Tdt_YeuCauSuaDAO {
                 yeuCau.getTdt_MaPhong(),
                 yeuCau.getTdt_MaNguoiDung(),
                 yeuCau.getTdt_TrangThai(),
-                yeuCau.getTdt_NgayGui(),
-                yeuCau.getTdt_NgayXuLy(),
+                yeuCau.getTdt_NgayGui() != null ? new java.sql.Date(yeuCau.getTdt_NgayGui().getTime()) : null,
+                yeuCau.getTdt_NgayXuLy() != null ? new java.sql.Date(yeuCau.getTdt_NgayXuLy().getTime()) : null,
                 yeuCau.getTdt_MaYeuCau());
     }
 

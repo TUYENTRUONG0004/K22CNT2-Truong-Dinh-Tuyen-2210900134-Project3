@@ -5,22 +5,14 @@ import com.springmvc.dao.Tdt_LichSuDatPhongDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.WebDataBinder;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 @Controller
 @RequestMapping("/lichsudatphong")
 public class Tdt_LichSuDatPhongController {
-	 @InitBinder
-	    public void initBinder(WebDataBinder binder) {
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        dateFormat.setLenient(false);
-	        binder.registerCustomEditor(Date.class, new org.springframework.beans.propertyeditors.CustomDateEditor(dateFormat, true));
-	    }
 
     @Autowired
     private Tdt_LichSuDatPhongDAO tdtLichSuDatPhongDAO;
@@ -30,19 +22,24 @@ public class Tdt_LichSuDatPhongController {
     public String listLichSu(Model model) {
         List<Tdt_LichSuDatPhong> list = tdtLichSuDatPhongDAO.list();
         model.addAttribute("lichSuList", list);
-        return "lichsudatphong/list"; // Trỏ đến /WEB-INF/views/lichsudatphong/list.jsp
+        return "lichsudatphong/list"; // File JSP: /WEB-INF/views/lichsudatphong/list.jsp
     }
 
     // Hiển thị form thêm lịch sử đặt phòng mới
     @GetMapping("/add")
     public String addLichSuForm(Model model) {
         model.addAttribute("lichSu", new Tdt_LichSuDatPhong());
-        return "lichsudatphong/add"; // Trỏ đến /WEB-INF/views/lichsudatphong/add.jsp
+        return "lichsudatphong/add"; // File JSP: /WEB-INF/views/lichsudatphong/add.jsp
     }
 
     // Lưu lịch sử đặt phòng mới
     @PostMapping("/save")
     public String saveLichSu(@ModelAttribute("lichSu") Tdt_LichSuDatPhong lichSu) {
+        // Sinh mã tự động nếu không được nhập từ form
+        if (lichSu.getTdt_MaDatPhong() == null || lichSu.getTdt_MaDatPhong().trim().isEmpty()) {
+            String generatedId = "DP" + System.currentTimeMillis();
+            lichSu.setTdt_MaDatPhong(generatedId);
+        }
         tdtLichSuDatPhongDAO.save(lichSu);
         return "redirect:/lichsudatphong/list";
     }
@@ -52,15 +49,20 @@ public class Tdt_LichSuDatPhongController {
     public String editLichSuForm(@PathVariable("id") String maDatPhong, Model model) {
         Tdt_LichSuDatPhong lichSu = tdtLichSuDatPhongDAO.getById(maDatPhong);
         model.addAttribute("lichSu", lichSu);
-        return "lichsudatphong/edit"; // Trỏ đến /WEB-INF/views/lichsudatphong/edit.jsp
+        return "lichsudatphong/edit"; // File JSP: /WEB-INF/views/lichsudatphong/edit.jsp
     }
 
-    // Cập nhật thông tin lịch sử đặt phòng
     @PostMapping("/update")
-    public String updateLichSu(@ModelAttribute("lichSu") Tdt_LichSuDatPhong lichSu) {
+    public String updateLichSu(@ModelAttribute("lichSu") Tdt_LichSuDatPhong lichSu, BindingResult result) {
+        if(result.hasErrors()){
+            // Log lỗi hoặc in ra console để xem chi tiết
+            System.out.println(result);
+            return "lichsudatphong/edit"; // Quay lại form sửa, hiển thị thông báo lỗi
+        }
         tdtLichSuDatPhongDAO.update(lichSu);
         return "redirect:/lichsudatphong/list";
     }
+
 
     // Xóa lịch sử đặt phòng theo mã đặt phòng
     @GetMapping("/delete/{id}")

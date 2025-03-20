@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh sách Phòng Học</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -32,7 +34,7 @@
             background-color: #fff;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 5px solid #28a745;
             padding: 8px;
             text-align: left;
         }
@@ -60,7 +62,9 @@
 </head>
 <body>
     <h1>Danh sách Phòng Học</h1>
-    <a class="add-link" href="${pageContext.request.contextPath}/phonghoc/add">➕</a>
+   <form action="${pageContext.request.contextPath}/phonghoc/add" method="get" style="display: inline;">
+    <button class="btn-add" type="submit">➕</button>
+</form>
     <table>
         <thead>
             <tr>
@@ -83,13 +87,17 @@
                     <td>${phong.tdt_TrangThai}</td>
                     <td>${phong.tdt_GhiChu}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/phonghoc/edit/${phong.tdt_MaPhong}">Sửa</a>
-                        |
-                        <a href="${pageContext.request.contextPath}/phonghoc/delete/${phong.tdt_MaPhong}"
-                           onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
-                           Xóa
-                        </a>
-                    </td>
+<td>
+    <a href="${pageContext.request.contextPath}/phonghoc/edit/${phong.tdt_MaPhong}" class="btn btn-edit">
+         Sửa
+    </a>
+
+    <a href="${pageContext.request.contextPath}/phonghoc/delete/${phong.tdt_MaPhong}"
+       class="btn btn-delete"
+       onclick="return confirm('Bạn có chắc chắn muốn xóa?');">
+         Xóa
+    </a>
+</td>
                 </tr>
             </c:forEach>
         </tbody>

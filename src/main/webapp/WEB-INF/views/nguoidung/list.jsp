@@ -6,6 +6,8 @@
 <head>
     <meta charset="UTF-8">
     <title>Danh Sách Người Dùng</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -33,7 +35,7 @@
             background-color: #fff;
         }
         th, td {
-            border: 1px solid #ddd;
+            border: 5px solid #28a745;
             padding: 8px;
             text-align: left;
         }
@@ -57,11 +59,27 @@
         .btn-menu:hover {
             background-color: #218838;
         }
+        .btn-add {
+    display: inline-block;
+    background-color: #28a745; /* Xanh lá */
+    color: #fff; /* Chữ trắng */
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+.btn-add:hover {
+    background-color: #218838; /* Màu xanh lá đậm khi hover */
+}
     </style>
 </head>
 <body>
     <h2>Danh Sách Người Dùng</h2>
-    <a class="add-link" href="${pageContext.request.contextPath}/nguoidung/add">➕</a>
+   
+    <form action="${pageContext.request.contextPath}/nguoidung/add" method="get" style="display: inline;">
+    <button class="btn-add" type="submit">➕</button>
+</form>
     <table>
         <thead>
             <tr>
@@ -80,9 +98,13 @@
                     <td>${nd.tdt_VaiTro}</td>
                     <td>${nd.tdt_Email}</td>
                     <td>
-                        <a href="${pageContext.request.contextPath}/nguoidung/edit/${nd.tdt_MaNguoiDung}">✏️ Sửa</a>
-                        |
-                        <a href="${pageContext.request.contextPath}/nguoidung/delete/${nd.tdt_MaNguoiDung}" onclick="return confirm('Bạn có chắc chắn muốn xóa?')">❌ Xóa</a>
+                        <form action="${pageContext.request.contextPath}/nguoidung/edit/${nd.tdt_MaNguoiDung}" method="get" style="display:inline;">
+    <button type="submit" class="btn btn-primary">Sửa</button>
+</form>
+
+<a href="${pageContext.request.contextPath}/nguoidung/delete/${nd.tdt_MaNguoiDung}" 
+   class="btn btn-delete"
+   onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
                     </td>
                 </tr>
             </c:forEach>

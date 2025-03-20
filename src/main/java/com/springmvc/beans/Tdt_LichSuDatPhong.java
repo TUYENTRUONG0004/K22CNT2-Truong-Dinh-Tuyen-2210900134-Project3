@@ -1,22 +1,26 @@
 package com.springmvc.beans;
 
+import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
-import java.time.LocalDateTime;
 
+/**
+ * Bean đại diện cho bảng tdt_LichSuDatPhong.
+ * Các trường thời gian được định dạng theo "yyyy-MM-dd",
+ * phù hợp với <input type="date"> của HTML.
+ */
 public class Tdt_LichSuDatPhong {
 
-    private String tdt_MaDatPhong;
-    private int tdt_MaNguoiDung;
-    private String tdt_MaPhong;
+    private String tdt_MaDatPhong;      // Mã đặt phòng (Primary Key)
+    private int tdt_MaNguoiDung;         // Mã người dùng đặt phòng
+    private String tdt_MaPhong;          // Mã phòng
 
-    // Spring sẽ tự parse dữ liệu từ input datetime-local (ví dụ: "2023-09-16T14:30")
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime tdt_ThoiGianBatDau;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tdt_ThoiGianBatDau;     // Ngày bắt đầu
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    private LocalDateTime tdt_ThoiGianKetThuc;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tdt_ThoiGianKetThuc;    // Ngày kết thúc
 
-    private String tdt_TrangThai;
+    private String tdt_TrangThai;        // Trạng thái (ví dụ: "Đang chờ", "Đã xác nhận")
 
     // Constructor mặc định
     public Tdt_LichSuDatPhong() {
@@ -24,7 +28,7 @@ public class Tdt_LichSuDatPhong {
 
     // Constructor có tham số
     public Tdt_LichSuDatPhong(String tdt_MaDatPhong, int tdt_MaNguoiDung, String tdt_MaPhong,
-                              LocalDateTime tdt_ThoiGianBatDau, LocalDateTime tdt_ThoiGianKetThuc, String tdt_TrangThai) {
+                              Date tdt_ThoiGianBatDau, Date tdt_ThoiGianKetThuc, String tdt_TrangThai) {
         this.tdt_MaDatPhong = tdt_MaDatPhong;
         this.tdt_MaNguoiDung = tdt_MaNguoiDung;
         this.tdt_MaPhong = tdt_MaPhong;
@@ -58,19 +62,19 @@ public class Tdt_LichSuDatPhong {
         this.tdt_MaPhong = tdt_MaPhong;
     }
 
-    public LocalDateTime getTdt_ThoiGianBatDau() {
+    public Date getTdt_ThoiGianBatDau() {
         return tdt_ThoiGianBatDau;
     }
 
-    public void setTdt_ThoiGianBatDau(LocalDateTime tdt_ThoiGianBatDau) {
+    public void setTdt_ThoiGianBatDau(Date tdt_ThoiGianBatDau) {
         this.tdt_ThoiGianBatDau = tdt_ThoiGianBatDau;
     }
 
-    public LocalDateTime getTdt_ThoiGianKetThuc() {
+    public Date getTdt_ThoiGianKetThuc() {
         return tdt_ThoiGianKetThuc;
     }
 
-    public void setTdt_ThoiGianKetThuc(LocalDateTime tdt_ThoiGianKetThuc) {
+    public void setTdt_ThoiGianKetThuc(Date tdt_ThoiGianKetThuc) {
         this.tdt_ThoiGianKetThuc = tdt_ThoiGianKetThuc;
     }
 

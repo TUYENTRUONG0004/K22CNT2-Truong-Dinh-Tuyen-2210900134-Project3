@@ -5,10 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -21,7 +19,7 @@ public class Tdt_LichSuDatPhongDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    // RowMapper: chuyển dữ liệu từ ResultSet sang đối tượng Tdt_LichSuDatPhong
+    // RowMapper: chuyển đổi dữ liệu từ ResultSet sang đối tượng Tdt_LichSuDatPhong
     private static class Tdt_LichSuDatPhongRowMapper implements RowMapper<Tdt_LichSuDatPhong> {
         @Override
         public Tdt_LichSuDatPhong mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -29,15 +27,8 @@ public class Tdt_LichSuDatPhongDAO {
             lichSu.setTdt_MaDatPhong(rs.getString("tdt_MaDatPhong"));
             lichSu.setTdt_MaNguoiDung(rs.getInt("tdt_MaNguoiDung"));
             lichSu.setTdt_MaPhong(rs.getString("tdt_MaPhong"));
-
-            Timestamp tsBatDau = rs.getTimestamp("tdt_ThoiGianBatDau");
-            if (tsBatDau != null) {
-                lichSu.setTdt_ThoiGianBatDau(tsBatDau.toLocalDateTime());
-            }
-            Timestamp tsKetThuc = rs.getTimestamp("tdt_ThoiGianKetThuc");
-            if (tsKetThuc != null) {
-                lichSu.setTdt_ThoiGianKetThuc(tsKetThuc.toLocalDateTime());
-            }
+            lichSu.setTdt_ThoiGianBatDau(rs.getDate("tdt_ThoiGianBatDau"));
+            lichSu.setTdt_ThoiGianKetThuc(rs.getDate("tdt_ThoiGianKetThuc"));
             lichSu.setTdt_TrangThai(rs.getString("tdt_TrangThai"));
             return lichSu;
         }
@@ -62,8 +53,8 @@ public class Tdt_LichSuDatPhongDAO {
                 lichSu.getTdt_MaDatPhong(),
                 lichSu.getTdt_MaNguoiDung(),
                 lichSu.getTdt_MaPhong(),
-                lichSu.getTdt_ThoiGianBatDau() != null ? Timestamp.valueOf(lichSu.getTdt_ThoiGianBatDau()) : null,
-                lichSu.getTdt_ThoiGianKetThuc() != null ? Timestamp.valueOf(lichSu.getTdt_ThoiGianKetThuc()) : null,
+                lichSu.getTdt_ThoiGianBatDau() != null ? new java.sql.Date(lichSu.getTdt_ThoiGianBatDau().getTime()) : null,
+                lichSu.getTdt_ThoiGianKetThuc() != null ? new java.sql.Date(lichSu.getTdt_ThoiGianKetThuc().getTime()) : null,
                 lichSu.getTdt_TrangThai());
     }
 
@@ -73,8 +64,8 @@ public class Tdt_LichSuDatPhongDAO {
         return jdbcTemplate.update(sql,
                 lichSu.getTdt_MaNguoiDung(),
                 lichSu.getTdt_MaPhong(),
-                lichSu.getTdt_ThoiGianBatDau() != null ? Timestamp.valueOf(lichSu.getTdt_ThoiGianBatDau()) : null,
-                lichSu.getTdt_ThoiGianKetThuc() != null ? Timestamp.valueOf(lichSu.getTdt_ThoiGianKetThuc()) : null,
+                lichSu.getTdt_ThoiGianBatDau() != null ? new java.sql.Date(lichSu.getTdt_ThoiGianBatDau().getTime()) : null,
+                lichSu.getTdt_ThoiGianKetThuc() != null ? new java.sql.Date(lichSu.getTdt_ThoiGianKetThuc().getTime()) : null,
                 lichSu.getTdt_TrangThai(),
                 lichSu.getTdt_MaDatPhong());
     }
